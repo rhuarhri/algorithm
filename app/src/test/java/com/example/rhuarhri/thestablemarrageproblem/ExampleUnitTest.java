@@ -24,7 +24,7 @@ A: big data algorithm
 B: android app
 C:artificial neural network
 
-lectures
+lecturers
 1:Dr Smith specialises in {android apps, artificial neural network, big data algorithms}
 2:Dr Cook specialises in {android apps, big data algorithms, artificial neural network}
 3:Dr Sculthorpe specialises in (artificial neural network, big data algorithms, android apps}
@@ -68,5 +68,18 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+
+    @Test
+    public void randomInput()
+    {
+        //The algorithm should be able to successfully match this input
+
+        /*
+        algorithm test = new algorithm();
+
+       list<project + lecture> result = test.pair(list<project> projects, list<lecturer> lecturers);
+
+         */
     }
 }
