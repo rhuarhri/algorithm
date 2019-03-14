@@ -2,6 +2,9 @@ package com.example.rhuarhri.thestablemarrageproblem;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -14,6 +17,11 @@ import static org.junit.Assert.*;
 HOW THE PROGRAM WORKS
 The program is design to match a student's final year project
 with a lecture.
+
+A student will input there final year project idea
+and the program will try and match it with a lecturer
+
+
 The program will use an algorithm called the stable marriage algorithm
 created by Gale and Shapley.
 
@@ -70,16 +78,122 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
+
+    private List<project> basicProjectInput()
+    {
+        List<project> projects = new ArrayList<project>();
+        project finalYearProject = new project();
+
+        finalYearProject.setName("app based home automation");
+        List<String> topics = new ArrayList<String>();
+        topics.add("mobile app");
+        topics.add("home automation");
+        finalYearProject.setCoveredTopics(topics);
+        List<String> requirements = new ArrayList<String>();
+        requirements.add("android studio");
+        requirements.add("mobile device");
+        requirements.add("sensors");
+
+
+        projects.add(finalYearProject);
+
+
+
+        return projects;
+    }
+
+    private List<lecturer> basicLecturerInput()
+    {
+        List<lecturer> lecturers = new ArrayList<lecturer>();
+        lecturer availableLecturer = new lecturer();
+
+        availableLecturer.setName("Dr Smith");
+        List<String> interestedIn = new ArrayList<String>();
+        interestedIn.add("mobile app");
+        interestedIn.add("home automation");
+        availableLecturer.setAreasOfInterest(interestedIn);
+        List<String> canHelpWith = new ArrayList<String>();
+        canHelpWith.add("android studio");
+        canHelpWith.add("mobile device");
+        canHelpWith.add("sensors");
+        availableLecturer.setCanHelpWith(canHelpWith);
+
+
+        lecturers.add(availableLecturer);
+
+        return lecturers;
+    }
+
     @Test
-    public void randomInput()
+    public void normalInput()
     {
         //The algorithm should be able to successfully match this input
 
-        /*
-        algorithm test = new algorithm();
+        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
 
-       list<project + lecture> result = test.pair(list<project> projects, list<lecturer> lecturers);
+        String lecturerName = test.pair("project");
+
+        String expected = null;
+        String result = lecturerName;
+
+        assertNotEquals(expected, result);
+
+        //TODO
+        /*
+        Depending on how the algorithm is used it may create different results
+        The bestFor parameter is there to exploit that.
+        Who it can get different results
+        For example if the algorithm match project with lecturer based on what the lecturer
+        wants then the result will benefit the lecturer.
+
+        This may need to be managed later in the program as there could be one result that
+        could be better than the other.
 
          */
     }
+
+    @Test
+    public void calculatePreferenceTest()
+    {
+
+
+        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+
+        String projectWantsLecturerWith = "home automation";
+
+        List<String> lecturerInterestedIn = new ArrayList<String>();
+
+        lecturerInterestedIn.add("games development");
+        lecturerInterestedIn.add("home automation");
+
+
+
+        int result = test.preferenceCalculator(lecturerInterestedIn, projectWantsLecturerWith);
+
+        int expected = 1;
+
+        assertEquals(expected, result);
+
+    }
+
+    @Test
+    public void calculatePreferenceTestNoMatchFound()
+    {
+        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+
+        String projectWantsLecturerWith = "app development";
+
+        List<String> lecturerInterestedIn = new ArrayList<String>();
+
+        lecturerInterestedIn.add("games development");
+        lecturerInterestedIn.add("home automation");
+
+        int result = test.preferenceCalculator(lecturerInterestedIn, projectWantsLecturerWith);
+
+        int expected = 0;
+
+        assertEquals(expected, result);
+    }
+
+
 }
