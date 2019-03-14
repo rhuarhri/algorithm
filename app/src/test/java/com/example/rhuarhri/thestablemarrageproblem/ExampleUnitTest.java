@@ -195,5 +195,63 @@ public class ExampleUnitTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    public void comparePossibleMatches()
+    {
+        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+
+        List<String> projectPreferences = new ArrayList<String>();
+        projectPreferences.add("home automation");
+        projectPreferences.add("games development");
+
+        String optionOneID = "dave";
+        List<String> optionOnePreferences = new ArrayList<String>();
+        optionOnePreferences.add("home automation");
+        optionOnePreferences.add("games development");
+
+        String optionTwoID = "fred";
+        List<String> optionTwoPreferences = new ArrayList<String>();
+        optionTwoPreferences.add("home automation");
+        optionTwoPreferences.add("big data algorithms");
+
+
+        String result =
+                test.compareTwoPossibleMatches(projectPreferences, optionOneID, optionTwoPreferences,
+                        optionTwoID, optionTwoPreferences);
+
+        String expected = "dave";
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void comparePossibleMatchesBothOptionEqual()
+    {
+        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+
+        List<String> projectPreferences = new ArrayList<String>();
+        projectPreferences.add("home automation");
+        projectPreferences.add("games development");
+
+        String optionOneID = "dave";
+        List<String> optionOnePreferences = new ArrayList<String>();
+        optionOnePreferences.add("home automation");
+        optionOnePreferences.add("games development");
+
+        String optionTwoID = "fred";
+        List<String> optionTwoPreferences = new ArrayList<String>();
+        optionTwoPreferences.add("home automation");
+        optionTwoPreferences.add("games development");
+
+
+        String result =
+                test.compareTwoPossibleMatches(projectPreferences, optionOneID, optionTwoPreferences,
+                        optionTwoID, optionTwoPreferences);
+
+        String expected = "dave";
+
+        assertEquals(expected, result);
+    }
+
 
 }
