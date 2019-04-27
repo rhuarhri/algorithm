@@ -78,6 +78,11 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
+    @Test
+    public void addition_isWrong() {
+        assertEquals(5, 2 + 2);
+    }
+
 /*
     private List<project> basicProjectInput()
     {
