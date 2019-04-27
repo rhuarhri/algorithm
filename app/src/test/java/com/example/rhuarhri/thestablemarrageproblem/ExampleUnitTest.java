@@ -80,7 +80,7 @@ public class ExampleUnitTest {
 
     @Test
     public void addition_isWrong() {
-        assertEquals(5, 2 + 2);
+        assertNotEquals(5, 2 + 2);
     }
 
 /*
