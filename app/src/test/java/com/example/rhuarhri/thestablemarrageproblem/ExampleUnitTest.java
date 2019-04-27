@@ -78,7 +78,7 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }*/
 
-/*
+
     private List<project> basicProjectInput()
     {
         List<project> projects = new ArrayList<project>();
@@ -150,7 +150,7 @@ public class ExampleUnitTest {
         could be better than the other.
 
          */
-    /*}
+    }
 
     @Test
     public void calculatePreferenceTest()
@@ -253,5 +253,5 @@ public class ExampleUnitTest {
         assertEquals(expected, result);
     }
 
-*/
+
 }
