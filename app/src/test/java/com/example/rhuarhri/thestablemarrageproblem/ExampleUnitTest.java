@@ -74,7 +74,7 @@ this might create a better match?
 
 public class ExampleUnitTest {
 
-
+/*
     private List<project> basicProjectInput()
     {
         List<project> projects = new ArrayList<project>();
@@ -120,7 +120,7 @@ public class ExampleUnitTest {
         return lecturers;
     }
 
-    /*
+
     @Test
     public void normalInput()
     {
@@ -146,8 +146,8 @@ public class ExampleUnitTest {
         This may need to be managed later in the program as there could be one result that
         could be better than the other.
 
-         *
-    }*/
+         *//*
+    }
 
     @Test
     public void calculatePreferenceTest()
@@ -249,6 +249,6 @@ public class ExampleUnitTest {
 
         assertEquals(expected, result);
     }
-
+*/
 
 }
