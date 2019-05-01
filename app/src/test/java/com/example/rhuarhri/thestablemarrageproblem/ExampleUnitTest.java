@@ -74,6 +74,13 @@ this might create a better match?
 
 public class ExampleUnitTest {
 
+    //setup
+    project setupProject = new project();
+    lecturer setupLecturer = new lecturer();
+    List<project> projectListSetup = new ArrayList<project>();
+    List<lecturer> lecturerListSetup = new ArrayList<lecturer>();
+    algorithm setupAlgorithm = new algorithm(projectListSetup, lecturerListSetup);
+
 
     private List<project> basicProjectInput()
     {
