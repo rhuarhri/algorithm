@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.rhuarhri.thestablemarrageproblem.algorithm;
+import com.example.rhuarhri.thestablemarrageproblem.lecturer;
+import com.example.rhuarhri.thestablemarrageproblem.project;
 
 import static org.junit.Assert.*;
 
@@ -74,12 +77,7 @@ this might create a better match?
 
 public class ExampleUnitTest {
 
-    //setup
-    project setupProject = new project();
-    lecturer setupLecturer = new lecturer();
-    List<project> projectListSetup = new ArrayList<project>();
-    List<lecturer> lecturerListSetup = new ArrayList<lecturer>();
-    algorithm setupAlgorithm = new algorithm(projectListSetup, lecturerListSetup);
+
 
 
     private List<project> basicProjectInput()
