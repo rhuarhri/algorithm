@@ -79,7 +79,7 @@ public class ExampleUnitTest {
 
 
 
-
+/*
     private List<project> basicProjectInput()
     {
         List<project> projects = new ArrayList<project>();
@@ -124,43 +124,27 @@ public class ExampleUnitTest {
 
         return lecturers;
     }
+*/
 
 
-    /*
-    @Test
-    public void normalInput()
-    {
-        //The algorithm should be able to successfully match this input
-
-        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
-
-        String lecturerName = test.pair("project");
-
-        String expected = null;
-        String result = lecturerName;
-
-        assertNotEquals(expected, result);
-
-        //TODO
-        /*
-        Depending on how the algorithm is used it may create different results
-        The bestFor parameter is there to exploit that.
-        Who it can get different results
-        For example if the algorithm match project with lecturer based on what the lecturer
-        wants then the result will benefit the lecturer.
-
-        This may need to be managed later in the program as there could be one result that
-        could be better than the other.
-
-         *//*
-    }*/
 
     @Test
     public void calculatePreferenceTest()
     {
 
+        /*
+        how it works
+        one topic of the project is selected along with the interests of one lecture
+        the project's topic is then compared against the lectures interests.
+        The greater the result the more interested that lecture is.
+        If the result is 0 no match was found
 
-        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+        This should work for comparing an lectures interest to project topics
+        by swapping the one project topic to a one lecture interest and the
+        lecture interests to project topics
+         */
+
+        algorithm test = new algorithm(false, false);
 
         String projectWantsLecturerWith = "home automation";
 
@@ -168,7 +152,6 @@ public class ExampleUnitTest {
 
         lecturerInterestedIn.add("games development");
         lecturerInterestedIn.add("home automation");
-
 
 
         int result = test.preferenceCalculator(lecturerInterestedIn, projectWantsLecturerWith);
@@ -179,10 +162,12 @@ public class ExampleUnitTest {
 
     }
 
+
+
     @Test
     public void calculatePreferenceTestNoMatchFound()
     {
-        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+        algorithm test = new algorithm(false, false);
 
         String projectWantsLecturerWith = "app development";
 
@@ -199,9 +184,195 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void wrongSetup()
+    {
+        boolean result = false;
+        try {
+            algorithm test = new algorithm(true, true);
+        }
+        catch (Exception e)
+        {
+            result = true;
+        }
+
+        boolean expected = true;
+
+        /*
+        The user should not be able to specify a bias that applies both lectures and projects
+         */
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void matchResultsBiasIsBestFit()
+    {
+        algorithm test = new algorithm(false, false);
+
+        String projectName = "text to speech app";
+        List<String> projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("UI design");
+
+        test.addProject(projectName, projectTopics);
+
+        projectName = "home smart lock";
+        projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("IOT");
+        projectTopics.add("cyber security");
+        projectTopics.add("app development");
+
+        test.addProject(projectName, projectTopics);
+
+        String lecturerName = "Dr Brown";
+        List<String> lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("IOT");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        lecturerName = "Dr Robinson";
+        lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("cyber security");
+        projectTopics.add("IOT");
+        projectTopics.add("UI design");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+
+        test.matching();
+
+        List<String> results = test.displayResults();
+
+        String result = results.get(0);
+        String expected = "Project " + "text to speech app" + " is paired with "
+                + " lecturer " + "Dr Brown"+ ".";
+
+        assertEquals(expected, result);
+
+    }
+
+    @Test
+    public void matchResultsBiasIsLecturer()
+    {
+        algorithm test = new algorithm(true, false);
+
+        String projectName = "text to speech app";
+        List<String> projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("UI design");
+
+        test.addProject(projectName, projectTopics);
+
+        projectName = "home smart lock";
+        projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("IOT");
+        projectTopics.add("cyber security");
+        projectTopics.add("app development");
+
+        test.addProject(projectName, projectTopics);
+
+        String lecturerName = "Dr Brown";
+        List<String> lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("IOT");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        lecturerName = "Dr Robinson";
+        lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("cyber security");
+        projectTopics.add("IOT");
+        projectTopics.add("UI design");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+
+        test.matching();
+
+        List<String> results = test.displayResults();
+
+        String result = results.get(0);
+        String expected = "Project " + "text to speech app" + " is paired with "
+                + " lecturer " + "Dr Brown"+ ".";
+
+        assertEquals(expected, result);
+
+
+    }
+
+    @Test
+    public void matchResultBiasIsProject()
+    {
+        algorithm test = new algorithm(false, true);
+
+        String projectName = "text to speech app";
+        List<String> projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("UI design");
+
+        test.addProject(projectName, projectTopics);
+
+        projectName = "home smart lock";
+        projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("IOT");
+        projectTopics.add("cyber security");
+        projectTopics.add("app development");
+
+        test.addProject(projectName, projectTopics);
+
+        String lecturerName = "Dr Brown";
+        List<String> lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("IOT");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        lecturerName = "Dr Robinson";
+        lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("cyber security");
+        projectTopics.add("IOT");
+        projectTopics.add("UI design");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+
+        test.matching();
+
+        List<String> results = test.displayResults();
+
+        String result = results.get(0);
+        String expected = "Project " + "text to speech app" + " is paired with "
+                + " lecturer " + "Dr Brown"+ ".";
+
+        assertEquals(expected, result);
+
+    }
+
+    /*
+    not needed
+    @Test
     public void comparePossibleMatches()
     {
-        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+        algorithm test = new algorithm(false, false);
 
         List<String> projectPreferences = new ArrayList<String>();
         projectPreferences.add("home automation");
@@ -230,7 +401,7 @@ public class ExampleUnitTest {
     @Test
     public void comparePossibleMatchesBothOptionEqual()
     {
-        algorithm test = new algorithm(basicProjectInput(), basicLecturerInput());
+        algorithm test = new algorithm(false, false);
 
         List<String> projectPreferences = new ArrayList<String>();
         projectPreferences.add("home automation");
@@ -254,6 +425,187 @@ public class ExampleUnitTest {
         String expected = "dave";
 
         assertEquals(expected, result);
+    }*/
+
+
+    /*
+    @Test
+    public void bestFit()
+    {
+        //The algorithm should be able to successfully match this input
+
+        algorithm test = new algorithm(false, false);
+
+        String lecturerName = test.pair("project");
+
+        String expected = null;
+        String result = lecturerName;
+
+        assertNotEquals(expected, result);
+
+        //TODO
+        /*
+        Depending on how the algorithm is used it may create different results
+        The bestFor parameter is there to exploit that.
+        Who it can get different results
+        For example if the algorithm match project with lecturer based on what the lecturer
+        wants then the result will benefit the lecturer.
+
+        This may need to be managed later in the program as there could be one result that
+        could be better than the other.
+
+
+    }*/
+
+
+    @Test
+    public void MoreProjectsThanLecturers()
+    {
+
+        algorithm test = new algorithm(false, false);
+
+        //project 1
+        String projectName = "text to speech app";
+        List<String> projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("UI design");
+
+        test.addProject(projectName, projectTopics);
+
+        //project 2
+        projectName = "home smart lock";
+        projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("IOT");
+        projectTopics.add("cyber security");
+        projectTopics.add("app development");
+
+        test.addProject(projectName, projectTopics);
+
+        //project 3
+        projectName = "game based education in VR";
+        projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("VR");
+        projectTopics.add("games development");
+        projectTopics.add("UI design");
+
+        test.addProject(projectName, projectTopics);
+
+        //lecturer 1
+        String lecturerName = "Dr Brown";
+        List<String> lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("IOT");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        //lecturer 2
+        lecturerName = "Dr Robinson";
+        lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("cyber security");
+        projectTopics.add("IOT");
+        projectTopics.add("UI design");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+
+        test.matching();
+
+        List<String> results = test.displayResults();
+
+        String result = results.get(0);
+        String expected = "Project too many projects";
+
+        assertEquals(expected, result);
+
+
+    }
+
+    @Test
+    public void MoreLecturersThanProjects()
+    {
+        algorithm test = new algorithm(false, false);
+
+        //project 1
+        String projectName = "text to speech app";
+        List<String> projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("UI design");
+
+        test.addProject(projectName, projectTopics);
+
+        //project 2
+        projectName = "home smart lock";
+        projectTopics = new ArrayList<String>();
+        //topics in order of importance
+        projectTopics.add("IOT");
+        projectTopics.add("cyber security");
+        projectTopics.add("app development");
+
+        test.addProject(projectName, projectTopics);
+
+        //lecturer 1
+        String lecturerName = "Dr Brown";
+        List<String> lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("natural language processing");
+        projectTopics.add("app development");
+        projectTopics.add("IOT");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        //lecturer 2
+        lecturerName = "Dr Robinson";
+        lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("cyber security");
+        projectTopics.add("IOT");
+        projectTopics.add("UI design");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        //lecturer 3
+        lecturerName = "Dr Smith";
+        lecturerInterests = new ArrayList<String>();
+        //topics in order of importance
+        lecturerInterests.add("VR");
+        projectTopics.add("games development");
+        projectTopics.add("UI design");
+
+        test.addLecture(lecturerName, lecturerInterests);
+
+        test.matching();
+
+        List<String> results = test.displayResults();
+
+        String result = results.get(0);
+
+        /*more projects may be added over time so meaning that not all lecturers
+        will have a project but will have one as time continues this should
+        not effect the algorithm*/
+        String expected = "Project " + "text to speech app" + " is paired with "
+                + " lecturer " + "Dr Brown"+ ".";
+
+        assertEquals(expected, result);
+
+    }
+
+    @Test
+    public void allDataTheSame()
+    {
+        /*
+        this test consists of two lectures with the same interest
+        and two projects with the same topic
+        both projects should be matched
+         */
     }
 
 
