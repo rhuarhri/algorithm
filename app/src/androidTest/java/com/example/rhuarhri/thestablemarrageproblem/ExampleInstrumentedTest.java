@@ -40,6 +40,9 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
+    /*
+    Ths test will not work if the smartphone is not active i.e. if it is on the lock / login screen
+     */
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule
