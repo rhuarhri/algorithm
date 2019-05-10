@@ -42,7 +42,7 @@ public class ExampleInstrumentedTest {
 
     /*
     Ths test will not work if the smartphone is not active i.e. if it is on the lock / login screen
-     */
+     *
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule
@@ -91,4 +91,5 @@ public class ExampleInstrumentedTest {
 
         onView(withId(R.id.saveProjectBTN)).perform(click());
     }
+    */
 }
