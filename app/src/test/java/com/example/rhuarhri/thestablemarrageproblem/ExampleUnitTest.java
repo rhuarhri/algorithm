@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.rhuarhri.thestablemarrageproblem.algorithm;
-import com.example.rhuarhri.thestablemarrageproblem.lecturer;
-import com.example.rhuarhri.thestablemarrageproblem.project;
 
 import static org.junit.Assert.*;
 
@@ -16,15 +13,12 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
-
-
 public class ExampleUnitTest {
 
-    /*
+
     @Test
     public void calculatePreferenceTest()
     {
-
         algorithm test = new algorithm(false, false);
 
         String projectWantsLecturerWith = "home automation";
@@ -34,13 +28,11 @@ public class ExampleUnitTest {
         lecturerInterestedIn.add("games development");
         lecturerInterestedIn.add("home automation");
 
-
         int result = test.preferenceCalculator(lecturerInterestedIn, projectWantsLecturerWith);
 
         int expected = 1;
 
         assertEquals(expected, result);
-
     }
 
 
@@ -80,7 +72,7 @@ public class ExampleUnitTest {
 
         /*
         The user should not be able to specify a bias that applies both lectures and projects
-         *
+         */
 
         assertEquals(expected, result);
     }
@@ -125,7 +117,6 @@ public class ExampleUnitTest {
         lecturerInterests.add("UI design");
 
         test.addLecture(lecturerName, lecturerInterests);
-
 
         test.matching();
 
@@ -180,7 +171,6 @@ public class ExampleUnitTest {
 
         test.addLecture(lecturerName, lecturerInterests);
 
-
         test.matching();
 
         List<String> results = test.displayResults();
@@ -190,8 +180,6 @@ public class ExampleUnitTest {
                 + " lecturer " + "Dr Brown"+ ".";
 
         assertEquals(expected, result);
-
-
     }
 
     @Test
@@ -328,7 +316,6 @@ public class ExampleUnitTest {
 
         test.addLecture(lecturerName, lecturerInterests);
 
-
         String result = "";
         try {
             test.matching();
@@ -339,11 +326,9 @@ public class ExampleUnitTest {
             result = e.getMessage();
         }
 
-
         String expected = "The number of projects must be equal to or less than the number of lecturers";
 
         assertEquals(expected, result);
-
 
     }
 
@@ -410,7 +395,7 @@ public class ExampleUnitTest {
 
         /*more projects may be added over time so meaning that not all lecturers
         will have a project but will have one as time continues this should
-        not effect the algorithm*
+        not effect the algorithm*/
         String expected = "Project " + "text to speech app" + " is paired with "
                 + " lecturer " + "Dr Brown"+ ".";
 
@@ -426,7 +411,7 @@ public class ExampleUnitTest {
         and two projects with the same topic the only thing that
         should be different in the names
         both projects should be matched
-         *
+         */
 
         algorithm test = new algorithm(false, false);
 
@@ -565,9 +550,6 @@ public class ExampleUnitTest {
         }
 
         assertEquals(expected, result);
-
-
-    }*/
-
+    }
 
 }

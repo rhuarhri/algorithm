@@ -42,9 +42,9 @@ public class ExampleInstrumentedTest {
 
     /*
     Ths test will not work if the smartphone is not active i.e. if it is on the lock / login screen
-     *
+     */
 
-    @Rule
+    @Rule//get app screen
     public ActivityTestRule<MainActivity> activityRule
             = new ActivityTestRule<>(MainActivity.class);
 
@@ -75,21 +75,25 @@ public class ExampleInstrumentedTest {
 
         String expected = "\nProject text to speech app is paired with  lecturer DR Brown.\n"+
                             "Project home smart lock is paired with  lecturer DR Robinson.";
+        //check expected equals displayed result (5)
         onView(withId(R.id.resultsDisplayTXT)).check(matches(withText(expected)));
 
     }
 
     private void addProject(String name, List<String> topics)
     {
+        //type project name into app (1)
         onView(withId(R.id.projectNameET)).perform(typeText(name), closeSoftKeyboard());
 
         for (int i = 0; i < topics.size(); i++)
         {
+            //type one topic into app (2)
             onView(withId(R.id.projectTopicsET)).perform(typeText(topics.get(i)), closeSoftKeyboard());
+            //save topic to project (3)
             onView(withId(R.id.addTopicBTN)).perform(click());
         }
-
+        //save project and match it to lecturer (4)
         onView(withId(R.id.saveProjectBTN)).perform(click());
     }
-    */
+
 }
